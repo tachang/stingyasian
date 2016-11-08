@@ -1,0 +1,108 @@
+## -*- coding: utf-8 -*-
+<%inherit file="base.mako" />
+
+<%def name="headtags()">
+  <title>A stingy asian's words of wisdom</title>
+
+  <script src="http://www.google.com/jsapi"></script>
+  <script>
+    // Load common libraries from Google
+    google.load("jquery", "1.4.2");
+    google.load("jqueryui", "1.8.5");
+  </script>
+  <script src="/js/livevalidation_standalone.compressed.js"></script>
+  <link rel="stylesheet" href="css/default.css" type="text/css"/>
+
+<script type="text/javascript">
+
+
+function customOnValid() {
+  var target_element = $( "#" + this.element.name + "-formstatus" );
+  target_element.text( this.message );
+  target_element.removeClass("field-invalid");
+  target_element.addClass("field-valid");
+}
+
+function customOnInvalid() {
+  var target_element = $( "#" + this.element.name + "-formstatus" );
+  target_element.text( this.message );
+  target_element.removeClass("field-valid");
+  target_element.addClass("field-invalid");
+}
+
+$(document).ready(function()
+{
+  var nameValidation = new LiveValidation('name', { validMessage: " ", onInvalid: customOnInvalid, onValid: customOnValid } );
+  nameValidation.add( Validate.Presence, { failureMessage: "You forgot something you idiot." } );
+
+  var emailValidation = new LiveValidation('email', { validMessage: " ", onInvalid: customOnInvalid, onValid: customOnValid } );
+  emailValidation.add( Validate.Presence, { failureMessage: "Wrong!" } );
+  emailValidation.add( Validate.Email, { failureMessage: "Wrong!" } );
+
+  var ideaValidation = new LiveValidation('idea', { validMessage: " ", onInvalid: customOnInvalid, onValid: customOnValid } );
+  ideaValidation.add( Validate.Presence, { failureMessage: "Enter the damn idea." } );
+
+});
+
+
+
+</script>
+
+</%def>
+
+<div class="container">
+
+<div class="header-padding"></div>
+
+<div class="heading-1">
+  Think you have what it takes to be a stingy asian?
+</div>
+
+<form name="ideaform" method="POST">
+
+<table class="standard-form">
+<tbody class="standard-form-body">
+
+<tr style="height: 100px;">
+  <td class="form-label">Name:</td>
+  <td class="form-input"><input id="name" type="text" name="name"/></td>
+  <td id="name-formstatus" class="field-status">&nbsp;</td>
+</tr>
+<tr>
+  <td class="form-label">E-mail:</td>
+  <td class="form-input"><input id="email" type="text" name="email"/></td>
+  <td id="email-formstatus" class="field-status"></td>
+</tr>
+<tr>
+  <td class="form-label">Your Stingy Idea:</td>
+  <td class="form-input"><textarea rows="4" cols="35" id="idea" name="idea"></textarea></td>
+  <td id="idea-formstatus" class="field-status"></td>
+</tr>
+
+<tr>
+  <td></td>
+  <td class="form-input">
+    <a href="#" onclick="document.ideaform.submit();"><div class="awesome">Submit This Shit</div></a>
+  </td>
+</tr>
+
+</tbody>
+
+</table>
+</form>
+
+<br/>
+
+<div class="textstyle-2">
+<p>
+Make the cut and we'll let you know. By giving us your e-mail we will send you whatever the fuck we want,
+whenever we want.*
+</p>
+
+</div>
+
+<div class="footnote">
+  *Of course you can unsubscribe but remember what happened to Cynthia when she tried that. We don't talk about Cynthia.
+</div>
+
+</div>
